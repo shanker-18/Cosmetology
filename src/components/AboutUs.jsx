@@ -13,10 +13,6 @@ const AboutUs = ({ onOpenModal }) => {
               alt="La Fuse Clinic Interior"
               className="about-main-img"
             />
-            <div className="about-floating-card">
-              <div className="num">100%</div>
-              <div className="txt">Safe & Result-Oriented Clinical Treatments</div>
-            </div>
           </div>
           <div className="about-text">
             <span className="section-subtitle">WELCOME TO LA FUSE</span>

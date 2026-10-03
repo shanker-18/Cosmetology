@@ -474,32 +474,6 @@ h1, h2, h3, h4, h5, h6 {
   object-fit: cover;
 }
 
-.about-floating-card {
-  position: absolute;
-  bottom: -25px;
-  right: -25px;
-  background: #FFFFFF;
-  padding: 1.5rem;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  border-left: 5px solid var(--primary-orange);
-  max-width: 240px;
-}
-
-.about-floating-card .num {
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: var(--primary-orange);
-  line-height: 1;
-}
-
-.about-floating-card .txt {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--dark-charcoal);
-  margin-top: 0.25rem;
-}
-
 .about-text .lead {
   font-size: 1.15rem;
   color: var(--text-dark);
@@ -817,15 +791,14 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 
-.footer-watermark {
+.footer-watermark-svg {
   position: absolute;
-  bottom: -30px;
-  right: -30px;
-  width: 320px;
-  height: 320px;
-  opacity: 0.04;
+  bottom: -40px;
+  right: -40px;
+  width: 380px;
+  height: 380px;
   pointer-events: none;
-  object-fit: contain;
+  z-index: 1;
 }
 
 .footer-grid {

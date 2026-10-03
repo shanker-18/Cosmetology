@@ -1,13 +1,29 @@
 import React from 'react';
 import logoImg from '../assets/logo.png';
-import flowerIcon from '../assets/flower-icon.png';
 import { Instagram, Facebook } from 'lucide-react';
 
 const Footer = () => {
   return (
     <footer className="footer">
-      {/* BACKGROUND FLOWER WATERMARK */}
-      <img src={flowerIcon} alt="Watermark" className="footer-watermark" />
+      {/* VECTOR SVG WATERMARK - CRISP & ELEGANT */}
+      <svg
+        className="footer-watermark-svg"
+        viewBox="0 0 200 200"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g opacity="0.05">
+          <ellipse cx="100" cy="50" rx="25" ry="45" fill="#E87500" />
+          <ellipse cx="100" cy="150" rx="25" ry="45" fill="#E87500" />
+          <ellipse cx="50" cy="100" rx="45" ry="25" fill="#E87500" />
+          <ellipse cx="150" cy="100" rx="45" ry="25" fill="#E87500" />
+          <ellipse cx="65" cy="65" rx="25" ry="45" transform="rotate(-45 65 65)" fill="#E87500" />
+          <ellipse cx="135" cy="135" rx="25" ry="45" transform="rotate(-45 135 135)" fill="#E87500" />
+          <ellipse cx="135" cy="65" rx="25" ry="45" transform="rotate(45 135 65)" fill="#E87500" />
+          <ellipse cx="65" cy="135" rx="25" ry="45" transform="rotate(45 65 135)" fill="#E87500" />
+          <circle cx="100" cy="100" r="20" fill="#E87500" />
+        </g>
+      </svg>
 
       <div className="container">
         <div className="footer-grid">
