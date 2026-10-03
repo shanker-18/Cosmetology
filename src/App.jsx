@@ -4,7 +4,6 @@ import Header from './components/Header';
 import HeroSlider from './components/HeroSlider';
 import AboutUs from './components/AboutUs';
 import Specialization from './components/Specialization';
-import SuccessStories from './components/SuccessStories';
 import ContactUs from './components/ContactUs';
 import Footer from './components/Footer';
 import MobileStickyBar from './components/MobileStickyBar';
@@ -30,7 +29,6 @@ function App() {
       <HeroSlider onOpenModal={handleOpenModal} />
       <AboutUs onOpenModal={handleOpenModal} />
       <Specialization onOpenModal={handleOpenModal} />
-      <SuccessStories />
       <ContactUs />
       <Footer />
       <MobileStickyBar onOpenModal={handleOpenModal} />

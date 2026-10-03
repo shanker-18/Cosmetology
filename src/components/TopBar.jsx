@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, Clock } from 'lucide-react';
+import { Phone, Mail, Clock, Instagram, Facebook } from 'lucide-react';
 
 const TopBar = () => {
   return (
@@ -12,12 +12,32 @@ const TopBar = () => {
           </div>
           <div className="top-bar-item">
             <Mail size={15} color="#E87500" />
-            <a href="mailto:cosmetologyclinic@iblhealthcare.com">cosmetologyclinic@iblhealthcare.com</a>
+            <a href="mailto:lafusecosmetologyclinic@gmail.com">lafusecosmetologyclinic@gmail.com</a>
           </div>
         </div>
         <div className="top-bar-hours">
-          <Clock size={15} color="#E87500" />
-          <span>Mon - Sat: 10:00 AM - 8:00 PM</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <Clock size={15} color="#E87500" />
+            <span>Mon - Sun: 10:00 AM - 8:00 PM</span>
+          </div>
+          <div className="social-bar-links">
+            <a
+              href="https://www.instagram.com/lafuse_cosmetology_clinic/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Instagram"
+            >
+              <Instagram size={15} />
+            </a>
+            <a
+              href="https://www.facebook.com/LafuseCosmetologyClinic/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Facebook"
+            >
+              <Facebook size={15} />
+            </a>
+          </div>
         </div>
       </div>
     </div>

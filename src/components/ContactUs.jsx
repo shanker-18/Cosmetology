@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin, ExternalLink } from 'lucide-react';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -55,7 +55,7 @@ const ContactUs = () => {
               </div>
               <div className="contact-detail-text">
                 <label>EMAIL ADDRESS</label>
-                <a href="mailto:cosmetologyclinic@iblhealthcare.com">cosmetologyclinic@iblhealthcare.com</a>
+                <a href="mailto:lafusecosmetologyclinic@gmail.com">lafusecosmetologyclinic@gmail.com</a>
               </div>
             </div>
 
@@ -64,28 +64,48 @@ const ContactUs = () => {
                 <MapPin size={20} color="#E87500" />
               </div>
               <div className="contact-detail-text">
-                <label>CLINIC LOCATION</label>
-                <p>Clinic address will be updated after client confirmation.</p>
+                <label>GOOGLE BUSINESS LOCATION</label>
+                <a
+                  href="https://share.google/bkHRyn5TRjyY2G38G"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: '#FFFFFF', textDecoration: 'underline' }}
+                >
+                  La Fuse Cosmetology Clinic Profile &rarr;
+                </a>
               </div>
             </div>
 
-            {/* MAP PLACEHOLDER */}
-            <div style={{
-              marginTop: '2rem',
-              borderRadius: 'var(--radius-md)',
-              overflow: 'hidden',
-              height: '180px',
-              background: '#323A42',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#A0AEC0',
-              fontSize: '0.9rem',
-              textAlign: 'center',
-              border: '1px dashed rgba(255,255,255,0.2)'
-            }}>
-              📍 Google Maps location embed placeholder<br />(Will be activated upon location confirmation)
-            </div>
+            {/* CLICKABLE GOOGLE BUSINESS MAP CARD */}
+            <a
+              href="https://share.google/bkHRyn5TRjyY2G38G"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                marginTop: '2rem',
+                borderRadius: 'var(--radius-md)',
+                overflow: 'hidden',
+                height: '180px',
+                background: '#323A42',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#FFFFFF',
+                fontSize: '0.95rem',
+                textAlign: 'center',
+                border: '1px solid rgba(232, 117, 0, 0.4)',
+                padding: '1rem',
+                transition: 'var(--transition)',
+                cursor: 'pointer'
+              }}
+            >
+              <MapPin size={32} color="#E87500" style={{ marginBottom: '0.5rem' }} />
+              <div style={{ fontWeight: 600, color: '#FFB366' }}>📍 View La Fuse Google Business Profile</div>
+              <div style={{ fontSize: '0.8rem', color: '#A0AEC0', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                4.7 ★★★★★ Google Reviews <ExternalLink size={12} />
+              </div>
+            </a>
           </div>
 
           {/* Appointment Form */}
@@ -144,7 +164,7 @@ const ContactUs = () => {
                     <option value="">-- Choose Service --</option>
                     <option value="Hair Care">Hair Care</option>
                     <option value="Skin Care">Skin Care</option>
-                    <option value="Weight Loss">Weight Loss / Slimming</option>
+                    <option value="Slimming">Slimming / Weight Loss</option>
                     <option value="Laser Hair Removal">Laser Hair Removal</option>
                   </select>
                 </div>

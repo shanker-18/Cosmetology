@@ -1,4 +1,5 @@
 import React from 'react';
+import aboutImg from '../assets/about-clinic.png';
 import { Check } from 'lucide-react';
 
 const AboutUs = ({ onOpenModal }) => {
@@ -8,7 +9,7 @@ const AboutUs = ({ onOpenModal }) => {
         <div className="about-grid">
           <div className="about-img-box">
             <img
-              src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80"
+              src={aboutImg}
               alt="La Fuse Clinic Interior"
               className="about-main-img"
             />

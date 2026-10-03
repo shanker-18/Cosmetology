@@ -8,7 +8,7 @@ const Header = ({ onOpenModal }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'specialization', 'success-stories', 'contact'];
+      const sections = ['home', 'about', 'specialization', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -32,7 +32,6 @@ const Header = ({ onOpenModal }) => {
     { label: 'HOME', href: '#home', id: 'home' },
     { label: 'ABOUT US', href: '#about', id: 'about' },
     { label: 'SPECIALIZATION', href: '#specialization', id: 'specialization' },
-    { label: 'SUCCESS STORIES', href: '#success-stories', id: 'success-stories' },
     { label: 'CONTACT US', href: '#contact', id: 'contact' },
   ];
 

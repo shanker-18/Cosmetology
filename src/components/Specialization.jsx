@@ -1,29 +1,60 @@
 import React from 'react';
+import flowerIcon from '../assets/flower-icon.png';
 
 const specsData = [
   {
     title: 'Hair Care',
-    desc: 'PRP, Regrowth & Scalp Treatments',
     image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80',
     service: 'Hair Care',
+    servicesList: [
+      'Hair Transplant',
+      'Hair Regrowth Treatment',
+      'Oxygen laser therapy for dandruff',
+      'GFC for Hair growth',
+      'Mesotherapy / Serum Infusion',
+    ],
   },
   {
     title: 'Skin Care',
-    desc: 'Acne, Pigmentation & Medi-Facials',
     image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=600&q=80',
     service: 'Skin Care',
+    servicesList: [
+      'Full Body skin whitening',
+      'Hydrafacial',
+      'Photo facial',
+      'Cosmelan Peel',
+      'Carbon Laser for skin pigmentation',
+      'Scar reduction',
+      'Stretch mark Reduction',
+      'Warts removal',
+      'Dark Lips Laser Treatment',
+      'Laser Hair Reduction',
+      'Botox & Fillers',
+      'Melasma treatment',
+      'Vampire Facial',
+      'Thread Lift & Plasma Lift',
+      'Micro Blading – Eye brows',
+      'Micro Pigmentation & Lip coloring',
+      'Skin Rejuvenation & Depigmentation',
+      'Face Lifting & Tattoo Removal',
+    ],
   },
   {
-    title: 'Weight Loss',
-    desc: 'Inch Loss & Body Sculpting',
+    title: 'Slimming',
     image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80',
-    service: 'Weight Loss',
+    service: 'Slimming',
+    servicesList: [
+      'Weight loss & Body Shaping',
+      'Cool Sculpting',
+      'Lipolaser',
+    ],
   },
   {
     title: 'Laser Hair Removal',
-    desc: 'Smooth, Precision Laser Care',
     image: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=600&q=80',
     service: 'Laser Hair Removal',
+    description:
+      'Laser hair removal is a medical procedure that uses a concentrated beam of light (laser) to remove unwanted hair. During laser hair removal, a laser emits a light that is absorbed by the pigment (melanin) in the hair. The light energy is converted to heat, which damages the tube-shaped sacs within the skin (hair follicles) that produce hairs. This damage inhibits or delays future hair growth.',
   },
 ];
 
@@ -39,17 +70,35 @@ const Specialization = ({ onOpenModal }) => {
 
         <div className="specialization-grid">
           {specsData.map((spec, idx) => (
-            <div
-              key={idx}
-              className="spec-card"
-              onClick={() => onOpenModal(spec.service)}
-            >
+            <div key={idx} className="spec-card">
               <div className="spec-img-wrapper">
                 <img src={spec.image} alt={spec.title} />
               </div>
               <div className="spec-body">
                 <h3 className="spec-title">{spec.title}</h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{spec.desc}</p>
+
+                {spec.servicesList ? (
+                  <ul className="services-sub-list">
+                    {spec.servicesList.map((item, itemIdx) => (
+                      <li key={itemIdx} className="service-sub-item">
+                        <img src={flowerIcon} alt="Bullet" className="flower-bullet-img" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p style={{ fontSize: '0.92rem', color: 'var(--text-muted)', margin: '0.75rem 0 1.5rem', lineHeight: '1.6' }}>
+                    {spec.description}
+                  </p>
+                )}
+
+                <button
+                  onClick={() => onOpenModal(spec.service)}
+                  className="btn btn-primary"
+                  style={{ width: '100%', marginTop: 'auto' }}
+                >
+                  BOOK {spec.title.toUpperCase()}
+                </button>
               </div>
             </div>
           ))}
