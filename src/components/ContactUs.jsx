@@ -1,0 +1,186 @@
+import React, { useState } from 'react';
+import { Phone, Mail, MapPin } from 'lucide-react';
+
+const ContactUs = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    treatment: '',
+    date: '',
+    message: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert('Thank you! Your enquiry has been received by La Fuse Cosmetology Clinic. Our representative will contact you shortly.');
+    setFormData({
+      name: '',
+      phone: '',
+      email: '',
+      treatment: '',
+      date: '',
+      message: '',
+    });
+  };
+
+  return (
+    <section id="contact" className="section-padding bg-warm">
+      <div className="container">
+        <div className="contact-grid">
+          {/* Contact Details */}
+          <div className="contact-info-card">
+            <h3>Get In Touch</h3>
+            <p style={{ color: '#CBD5E0', marginBottom: '2rem' }}>
+              Have questions or want to schedule a confidential consultation? Reach out to our team today.
+            </p>
+
+            <div className="contact-detail-item">
+              <div className="contact-icon">
+                <Phone size={20} color="#E87500" />
+              </div>
+              <div className="contact-detail-text">
+                <label>PHONE NUMBER</label>
+                <a href="tel:+918939100700">+91 89391 00700</a>
+              </div>
+            </div>
+
+            <div className="contact-detail-item">
+              <div className="contact-icon">
+                <Mail size={20} color="#E87500" />
+              </div>
+              <div className="contact-detail-text">
+                <label>EMAIL ADDRESS</label>
+                <a href="mailto:cosmetologyclinic@iblhealthcare.com">cosmetologyclinic@iblhealthcare.com</a>
+              </div>
+            </div>
+
+            <div className="contact-detail-item">
+              <div className="contact-icon">
+                <MapPin size={20} color="#E87500" />
+              </div>
+              <div className="contact-detail-text">
+                <label>CLINIC LOCATION</label>
+                <p>Clinic address will be updated after client confirmation.</p>
+              </div>
+            </div>
+
+            {/* MAP PLACEHOLDER */}
+            <div style={{
+              marginTop: '2rem',
+              borderRadius: 'var(--radius-md)',
+              overflow: 'hidden',
+              height: '180px',
+              background: '#323A42',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#A0AEC0',
+              fontSize: '0.9rem',
+              textAlign: 'center',
+              border: '1px dashed rgba(255,255,255,0.2)'
+            }}>
+              📍 Google Maps location embed placeholder<br />(Will be activated upon location confirmation)
+            </div>
+          </div>
+
+          {/* Appointment Form */}
+          <div className="contact-form-card">
+            <h3>Book Consultation</h3>
+            <form onSubmit={handleSubmit}>
+              <div className="form-grid">
+                <div className="form-group">
+                  <label htmlFor="name">Full Name *</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    className="form-control"
+                    placeholder="Your name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="phone">Phone Number *</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    className="form-control"
+                    placeholder="+91 00000 00000"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group full-width">
+                  <label htmlFor="email">Email Address</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    className="form-control"
+                    placeholder="name@example.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="treatment">Select Service *</label>
+                  <select
+                    id="treatment"
+                    name="treatment"
+                    className="form-control"
+                    value={formData.treatment}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">-- Choose Service --</option>
+                    <option value="Hair Care">Hair Care</option>
+                    <option value="Skin Care">Skin Care</option>
+                    <option value="Weight Loss">Weight Loss / Slimming</option>
+                    <option value="Laser Hair Removal">Laser Hair Removal</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="date">Preferred Date</label>
+                  <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    className="form-control"
+                    value={formData.date}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-group full-width">
+                  <label htmlFor="message">Message / Notes</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={3}
+                    className="form-control"
+                    placeholder="Tell us about your concern..."
+                    value={formData.message}
+                    onChange={handleChange}
+                  ></textarea>
+                </div>
+              </div>
+              <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
+                SUBMIT APPOINTMENT REQUEST
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ContactUs;
