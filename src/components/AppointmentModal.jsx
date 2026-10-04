@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, CheckCircle } from 'lucide-react';
-import { sendAppointmentEmails } from '../utils/emailService';
+import { saveAppointmentAndNotify, fetchBookedSlots } from '../utils/appointmentService';
 
 const timeSlots = [
   '10:00 AM - 10:45 AM',
@@ -26,6 +26,7 @@ const AppointmentModal = ({ isOpen, onClose, selectedService }) => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [message, setMessage] = useState('');
+  const [bookedSlots, setBookedSlots] = useState([]);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -35,13 +36,21 @@ const AppointmentModal = ({ isOpen, onClose, selectedService }) => {
     }
   }, [selectedService]);
 
+  useEffect(() => {
+    if (date) {
+      fetchBookedSlots(date).then((slots) => setBookedSlots(slots));
+    } else {
+      setBookedSlots([]);
+    }
+  }, [date]);
+
   if (!isOpen) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const result = await sendAppointmentEmails({
+    await saveAppointmentAndNotify({
       name,
       phone,
       email,
@@ -62,6 +71,7 @@ const AppointmentModal = ({ isOpen, onClose, selectedService }) => {
     setDate('');
     setTime('');
     setMessage('');
+    setBookedSlots([]);
     setSubmitted(false);
     onClose();
   };
@@ -80,7 +90,7 @@ const AppointmentModal = ({ isOpen, onClose, selectedService }) => {
               Appointment Request Received!
             </h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>
-              Thank you <strong>{name}</strong>! Confirmation emails have been sent to <strong>{email || 'your email'}</strong> and to <strong>La Fuse Cosmetology Clinic</strong>.
+              Thank you <strong>{name}</strong>! Your appointment has been saved to the clinic database and confirmation emails have been sent to <strong>{email || 'your email'}</strong>.
             </p>
             <button onClick={handleResetAndClose} className="btn btn-primary" style={{ width: '100%' }}>
               DONE
@@ -168,9 +178,14 @@ const AppointmentModal = ({ isOpen, onClose, selectedService }) => {
                     required
                   >
                     <option value="">-- Select Time Slot --</option>
-                    {timeSlots.map((slot, idx) => (
-                      <option key={idx} value={slot}>{slot}</option>
-                    ))}
+                    {timeSlots.map((slot, idx) => {
+                      const isBooked = bookedSlots.includes(slot);
+                      return (
+                        <option key={idx} value={slot} disabled={isBooked}>
+                          {slot} {isBooked ? '(Already Booked)' : ''}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
               </div>
@@ -192,7 +207,7 @@ const AppointmentModal = ({ isOpen, onClose, selectedService }) => {
                 style={{ width: '100%', marginTop: '0.5rem' }}
                 disabled={loading}
               >
-                {loading ? 'SENDING REQUEST...' : 'CONFIRM APPOINTMENT REQUEST'}
+                {loading ? 'SAVING APPOINTMENT...' : 'CONFIRM APPOINTMENT REQUEST'}
               </button>
             </form>
           </>

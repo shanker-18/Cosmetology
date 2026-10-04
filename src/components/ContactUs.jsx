@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Phone, Mail, MapPin, ExternalLink, CheckCircle } from 'lucide-react';
-import { sendAppointmentEmails } from '../utils/emailService';
+import { saveAppointmentAndNotify, fetchBookedSlots } from '../utils/appointmentService';
 
 const timeSlots = [
   '10:00 AM - 10:45 AM',
@@ -29,8 +29,17 @@ const ContactUs = () => {
     message: '',
   });
 
+  const [bookedSlots, setBookedSlots] = useState([]);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (formData.date) {
+      fetchBookedSlots(formData.date).then((slots) => setBookedSlots(slots));
+    } else {
+      setBookedSlots([]);
+    }
+  }, [formData.date]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -40,7 +49,7 @@ const ContactUs = () => {
     e.preventDefault();
     setLoading(true);
 
-    await sendAppointmentEmails({
+    await saveAppointmentAndNotify({
       name: formData.name,
       phone: formData.phone,
       email: formData.email,
@@ -61,6 +70,7 @@ const ContactUs = () => {
       time: '',
       message: '',
     });
+    setBookedSlots([]);
   };
 
   return (
@@ -166,7 +176,7 @@ const ContactUs = () => {
                   Request Submitted Successfully!
                 </h4>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
-                  Thank you! Confirmation emails have been dispatched to your inbox and to <strong>La Fuse Cosmetology Clinic</strong>. Our representative will contact you shortly.
+                  Thank you! Your appointment has been saved to the database and confirmation emails have been dispatched to your inbox and <strong>La Fuse Cosmetology Clinic</strong>.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
@@ -257,9 +267,14 @@ const ContactUs = () => {
                       required
                     >
                       <option value="">-- Choose Time --</option>
-                      {timeSlots.map((slot, idx) => (
-                        <option key={idx} value={slot}>{slot}</option>
-                      ))}
+                      {timeSlots.map((slot, idx) => {
+                        const isBooked = bookedSlots.includes(slot);
+                        return (
+                          <option key={idx} value={slot} disabled={isBooked}>
+                            {slot} {isBooked ? '(Already Booked)' : ''}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                   <div className="form-group full-width">
