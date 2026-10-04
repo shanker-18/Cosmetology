@@ -1,5 +1,22 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, ExternalLink } from 'lucide-react';
+import { Phone, Mail, MapPin, ExternalLink, CheckCircle } from 'lucide-react';
+import { sendAppointmentEmails } from '../utils/emailService';
+
+const timeSlots = [
+  '10:00 AM - 10:45 AM',
+  '10:45 AM - 11:30 AM',
+  '11:30 AM - 12:15 PM',
+  '12:15 PM - 01:00 PM',
+  '01:00 PM - 01:45 PM',
+  '01:45 PM - 02:30 PM',
+  '02:30 PM - 03:15 PM',
+  '03:15 PM - 04:00 PM',
+  '04:00 PM - 04:45 PM',
+  '04:45 PM - 05:30 PM',
+  '05:30 PM - 06:15 PM',
+  '06:15 PM - 07:00 PM',
+  '07:00 PM - 07:45 PM',
+];
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -8,22 +25,40 @@ const ContactUs = () => {
     email: '',
     treatment: '',
     date: '',
+    time: '',
     message: '',
   });
+
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Thank you! Your enquiry has been received by La Fuse Cosmetology Clinic. Our representative will contact you shortly.');
+    setLoading(true);
+
+    await sendAppointmentEmails({
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      treatment: formData.treatment,
+      date: formData.date,
+      time: formData.time,
+      message: formData.message,
+    });
+
+    setLoading(false);
+    setSubmitted(true);
     setFormData({
       name: '',
       phone: '',
       email: '',
       treatment: '',
       date: '',
+      time: '',
       message: '',
     });
   };
@@ -124,110 +159,132 @@ const ContactUs = () => {
           {/* Appointment Form */}
           <div className="contact-form-card">
             <h3>Book Consultation</h3>
-            <form onSubmit={handleSubmit}>
-              <div className="form-grid">
-                <div className="form-group">
-                  <label htmlFor="name">Full Name *</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="form-control"
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone">Phone Number *</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    className="form-control"
-                    placeholder="+91 00000 00000"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group full-width">
-                  <label htmlFor="email">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="form-control"
-                    placeholder="name@example.com"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="treatment">Select Service *</label>
-                  <select
-                    id="treatment"
-                    name="treatment"
-                    className="form-control"
-                    value={formData.treatment}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">-- Choose Service --</option>
-                    <option value="Hair Care">Hair Care</option>
-                    <option value="Skin Care">Skin Care</option>
-                    <option value="Slimming">Slimming / Weight Loss</option>
-                    <option value="Laser Hair Removal">Laser Hair Removal</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="date">Preferred Date</label>
-                  <input
-                    type="date"
-                    id="date"
-                    name="date"
-                    className="form-control"
-                    value={formData.date}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form-group full-width">
-                  <label htmlFor="message">Message / Notes</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={3}
-                    className="form-control"
-                    placeholder="Tell us about your concern..."
-                    value={formData.message}
-                    onChange={handleChange}
-                  ></textarea>
-                </div>
+            {submitted ? (
+              <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+                <CheckCircle size={52} color="#E87500" style={{ margin: '0 auto 1rem' }} />
+                <h4 style={{ fontSize: '1.4rem', color: 'var(--dark-charcoal)', marginBottom: '0.5rem' }}>
+                  Request Submitted Successfully!
+                </h4>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
+                  Thank you! Confirmation emails have been dispatched to your inbox and to <strong>La Fuse Cosmetology Clinic</strong>. Our representative will contact you shortly.
+                </p>
+                <button
+                  onClick={() => setSubmitted(false)}
+                  className="btn btn-primary"
+                >
+                  Book Another Appointment
+                </button>
               </div>
-              <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
-                SUBMIT APPOINTMENT REQUEST
-              </button>
-              <a
-                href="https://calendar.app.google/97VTcbGRsPCPVGMH8?ctz=Asia/Kolkata"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-outline"
-                style={{
-                  width: '100%',
-                  marginTop: '0.75rem',
-                  borderColor: 'var(--primary-orange)',
-                  color: 'var(--primary-orange)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem',
-                  fontWeight: 600
-                }}
-              >
-                📅 Book Directly on Google Calendar <ExternalLink size={14} />
-              </a>
-            </form>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <div className="form-grid">
+                  <div className="form-group">
+                    <label htmlFor="name">Full Name *</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      className="form-control"
+                      placeholder="Your name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phone">Phone Number *</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      className="form-control"
+                      placeholder="+91 00000 00000"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group full-width">
+                    <label htmlFor="email">Email Address *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="form-control"
+                      placeholder="name@example.com"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="treatment">Select Service *</label>
+                    <select
+                      id="treatment"
+                      name="treatment"
+                      className="form-control"
+                      value={formData.treatment}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">-- Choose Service --</option>
+                      <option value="Hair Care">Hair Care</option>
+                      <option value="Skin Care">Skin Care</option>
+                      <option value="Slimming">Slimming / Weight Loss</option>
+                      <option value="Laser Hair Removal">Laser Hair Removal</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="date">Preferred Date *</label>
+                    <input
+                      type="date"
+                      id="date"
+                      name="date"
+                      className="form-control"
+                      value={formData.date}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="time">Preferred Time Slot *</label>
+                    <select
+                      id="time"
+                      name="time"
+                      className="form-control"
+                      value={formData.time}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">-- Choose Time --</option>
+                      {timeSlots.map((slot, idx) => (
+                        <option key={idx} value={slot}>{slot}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="form-group full-width">
+                    <label htmlFor="message">Message / Notes</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={3}
+                      className="form-control"
+                      placeholder="Tell us about your concern..."
+                      value={formData.message}
+                      onChange={handleChange}
+                    ></textarea>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ width: '100%', marginTop: '1rem' }}
+                  disabled={loading}
+                >
+                  {loading ? 'SUBMITTING ENQUIRY...' : 'SUBMIT APPOINTMENT REQUEST'}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>

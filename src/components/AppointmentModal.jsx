@@ -1,126 +1,202 @@
-import React from 'react';
-import { X, Calendar, ExternalLink, CheckCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, CheckCircle } from 'lucide-react';
+import { sendAppointmentEmails } from '../utils/emailService';
+
+const timeSlots = [
+  '10:00 AM - 10:45 AM',
+  '10:45 AM - 11:30 AM',
+  '11:30 AM - 12:15 PM',
+  '12:15 PM - 01:00 PM',
+  '01:00 PM - 01:45 PM',
+  '01:45 PM - 02:30 PM',
+  '02:30 PM - 03:15 PM',
+  '03:15 PM - 04:00 PM',
+  '04:00 PM - 04:45 PM',
+  '04:45 PM - 05:30 PM',
+  '05:30 PM - 06:15 PM',
+  '06:15 PM - 07:00 PM',
+  '07:00 PM - 07:45 PM',
+];
 
 const AppointmentModal = ({ isOpen, onClose, selectedService }) => {
+  const [service, setService] = useState('Hair Care');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (selectedService) {
+      setService(selectedService === 'Skin Treatment' ? 'Skin Care' : selectedService);
+    }
+  }, [selectedService]);
+
   if (!isOpen) return null;
 
-  const googleCalendarUrl = "https://calendar.app.google/97VTcbGRsPCPVGMH8?ctz=Asia/Kolkata";
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const result = await sendAppointmentEmails({
+      name,
+      phone,
+      email,
+      treatment: service,
+      date,
+      time,
+      message,
+    });
+
+    setLoading(false);
+    setSubmitted(true);
+  };
+
+  const handleResetAndClose = () => {
+    setName('');
+    setPhone('');
+    setEmail('');
+    setDate('');
+    setTime('');
+    setMessage('');
+    setSubmitted(false);
+    onClose();
+  };
 
   return (
-    <div className="modal active" onClick={onClose}>
-      <div
-        className="modal-card"
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          maxWidth: '650px',
-          width: '92%',
-          maxHeight: '90vh',
-          display: 'flex',
-          flexDirection: 'column',
-          padding: '1.75rem',
-          borderRadius: 'var(--radius-lg)',
-          overflowY: 'auto'
-        }}
-      >
-        <span className="modal-close" onClick={onClose} style={{ position: 'absolute', top: '1.25rem', right: '1.25rem', cursor: 'pointer', zIndex: 10 }}>
+    <div className="modal active" onClick={handleResetAndClose}>
+      <div className="modal-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '520px' }}>
+        <span className="modal-close" onClick={handleResetAndClose}>
           <X size={24} />
         </span>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.25rem' }}>
-          <Calendar size={26} color="var(--primary-orange)" />
-          <h3 style={{ fontSize: '1.6rem', color: 'var(--dark-charcoal)', margin: 0 }}>
-            Book Consultation
-          </h3>
-        </div>
-
-        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
-          Select your preferred date & time slot directly on our official Google Calendar.
-          {selectedService && <strong> Specialization: {selectedService}</strong>}
-        </p>
-
-        {/* GOOGLE CALENDAR DIRECT BOOKING CARD */}
-        <div
-          style={{
-            background: 'linear-gradient(135deg, #FFF4EB 0%, #FFFFFF 100%)',
-            border: '2px solid rgba(232, 117, 0, 0.3)',
-            borderRadius: 'var(--radius-md)',
-            padding: '1.5rem',
-            textAlign: 'center',
-            marginBottom: '1rem',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-          }}
-        >
-          <div
-            style={{
-              width: '56px',
-              height: '56px',
-              borderRadius: '50%',
-              background: 'rgba(232, 117, 0, 0.15)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1rem'
-            }}
-          >
-            <Calendar size={30} color="var(--primary-orange)" />
+        {submitted ? (
+          <div style={{ textAlign: 'center', padding: '1.5rem 0' }}>
+            <CheckCircle size={56} color="#E87500" style={{ margin: '0 auto 1rem' }} />
+            <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--dark-charcoal)' }}>
+              Appointment Request Received!
+            </h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>
+              Thank you <strong>{name}</strong>! Confirmation emails have been sent to <strong>{email || 'your email'}</strong> and to <strong>La Fuse Cosmetology Clinic</strong>.
+            </p>
+            <button onClick={handleResetAndClose} className="btn btn-primary" style={{ width: '100%' }}>
+              DONE
+            </button>
           </div>
+        ) : (
+          <>
+            <h3 style={{ fontSize: '1.6rem', marginBottom: '0.3rem', color: 'var(--dark-charcoal)' }}>
+              Get Appointment
+            </h3>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
+              Schedule your consultation with La Fuse Cosmetology specialists.
+            </p>
 
-          <h4 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: 'var(--dark-charcoal)' }}>
-            La Fuse Google Calendar Appointment Scheduler
-          </h4>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group" style={{ marginBottom: '0.85rem' }}>
+                <label style={{ fontSize: '0.82rem', fontWeight: 600, display: 'block', marginBottom: '0.2rem' }}>Full Name *</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Your Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
 
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', maxWidth: '440px', marginBottom: '1.25rem' }}>
-            Instant appointment confirmation & calendar invites will be sent directly to your email address and our clinic team.
-          </p>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.85rem' }}>
+                <div className="form-group">
+                  <label style={{ fontSize: '0.82rem', fontWeight: 600, display: 'block', marginBottom: '0.2rem' }}>Phone Number *</label>
+                  <input
+                    type="tel"
+                    className="form-control"
+                    placeholder="+91 Phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label style={{ fontSize: '0.82rem', fontWeight: 600, display: 'block', marginBottom: '0.2rem' }}>Email Address *</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder="name@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100%', maxWidth: '360px', marginBottom: '1.5rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: '#2D3748', justifyContent: 'center' }}>
-              <CheckCircle size={16} color="#38A169" />
-              <span>Real-time Available Time Slots</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: '#2D3748', justifyContent: 'center' }}>
-              <CheckCircle size={16} color="#38A169" />
-              <span>Instant Patient & Clinic Email Alerts</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: '#2D3748', justifyContent: 'center' }}>
-              <CheckCircle size={16} color="#38A169" />
-              <span>100% Free & Secure Booking</span>
-            </div>
-          </div>
+              <div className="form-group" style={{ marginBottom: '0.85rem' }}>
+                <label style={{ fontSize: '0.82rem', fontWeight: 600, display: 'block', marginBottom: '0.2rem' }}>Select Service *</label>
+                <select
+                  className="form-control"
+                  value={service}
+                  onChange={(e) => setService(e.target.value)}
+                  required
+                >
+                  <option value="Hair Care">Hair Care</option>
+                  <option value="Skin Care">Skin Care</option>
+                  <option value="Slimming">Slimming</option>
+                  <option value="Laser Hair Removal">Laser Hair Removal</option>
+                </select>
+              </div>
 
-          <a
-            href={googleCalendarUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-            style={{
-              width: '100%',
-              maxWidth: '360px',
-              fontSize: '1rem',
-              padding: '0.9rem 1.5rem',
-              boxShadow: '0 6px 20px rgba(232, 117, 0, 0.4)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '0.6rem'
-            }}
-          >
-            📅 OPEN GOOGLE CALENDAR BOOKING <ExternalLink size={16} />
-          </a>
-        </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.85rem' }}>
+                <div className="form-group">
+                  <label style={{ fontSize: '0.82rem', fontWeight: 600, display: 'block', marginBottom: '0.2rem' }}>Preferred Date *</label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label style={{ fontSize: '0.82rem', fontWeight: 600, display: 'block', marginBottom: '0.2rem' }}>Preferred Time Slot *</label>
+                  <select
+                    className="form-control"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                    required
+                  >
+                    <option value="">-- Select Time Slot --</option>
+                    {timeSlots.map((slot, idx) => (
+                      <option key={idx} value={slot}>{slot}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
 
-        {/* EMBEDDED IFRAME FOR IN-MODAL CALENDAR VIEW */}
-        <div style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', border: '1px solid var(--border-color)', height: '340px' }}>
-          <iframe
-            title="La Fuse Google Calendar Appointment Scheduler"
-            src={googleCalendarUrl}
-            width="100%"
-            height="100%"
-            style={{ border: 0, display: 'block' }}
-          ></iframe>
-        </div>
+              <div className="form-group" style={{ marginBottom: '1rem' }}>
+                <label style={{ fontSize: '0.82rem', fontWeight: 600, display: 'block', marginBottom: '0.2rem' }}>Message / Concern</label>
+                <textarea
+                  rows={2}
+                  className="form-control"
+                  placeholder="Any specific query or note..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                className="btn btn-primary"
+                style={{ width: '100%', marginTop: '0.5rem' }}
+                disabled={loading}
+              >
+                {loading ? 'SENDING REQUEST...' : 'CONFIRM APPOINTMENT REQUEST'}
+              </button>
+            </form>
+          </>
+        )}
       </div>
     </div>
   );
