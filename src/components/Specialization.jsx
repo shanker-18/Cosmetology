@@ -1,10 +1,12 @@
 import React from 'react';
 import flowerIcon from '../assets/flower-icon.png';
+import hairImg from '../assets/hair-treatment.png';
+import laserImg from '../assets/laser-hair-removal.png';
 
 const specsData = [
   {
     title: 'Hair Care',
-    image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80',
+    image: hairImg,
     service: 'Hair Care',
     servicesList: [
       'Hair Regrowth Treatment (PRP)',
@@ -56,7 +58,7 @@ const specsData = [
   },
   {
     title: 'Laser Hair Removal',
-    image: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=600&q=80',
+    image: laserImg,
     service: 'Laser Hair Removal',
     description:
       'Laser hair removal is a medical procedure that uses a concentrated beam of light (laser) to remove unwanted hair. During laser hair removal, a laser emits a light that is absorbed by the pigment (melanin) in the hair. The light energy is converted to heat, which damages the tube-shaped sacs within the skin (hair follicles) that produce hairs. This damage inhibits or delays future hair growth.',
