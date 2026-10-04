@@ -208,6 +208,25 @@ const ContactUs = () => {
               <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
                 SUBMIT APPOINTMENT REQUEST
               </button>
+              <a
+                href="https://calendar.app.google/97VTcbGRsPCPVGMH8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline"
+                style={{
+                  width: '100%',
+                  marginTop: '0.75rem',
+                  borderColor: 'var(--primary-orange)',
+                  color: 'var(--primary-orange)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  fontWeight: 600
+                }}
+              >
+                📅 Book Directly on Google Calendar <ExternalLink size={14} />
+              </a>
             </form>
           </div>
         </div>
