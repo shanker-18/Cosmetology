@@ -1,5 +1,6 @@
 import React from 'react';
 import aboutImg from '../assets/about-clinic.png';
+import receptionImg from '../assets/clinic-reception.png';
 import { Check } from 'lucide-react';
 
 const AboutUs = ({ onOpenModal }) => {
@@ -8,12 +9,46 @@ const AboutUs = ({ onOpenModal }) => {
       <div className="container">
         <div className="about-grid">
           <div className="about-img-box">
-            <img
-              src={aboutImg}
-              alt="La Fuse Clinic Interior"
-              className="about-main-img"
-            />
+            <div className="clinic-gallery-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-md)', border: '2px solid rgba(232, 117, 0, 0.2)' }}>
+                <img
+                  src={aboutImg}
+                  alt="La Fuse Cosmetology Clinic Clinical Setup & Treatment Banners"
+                  className="about-main-img"
+                  style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '380px', objectFit: 'cover' }}
+                />
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', border: '1px solid rgba(232, 117, 0, 0.2)', boxShadow: 'var(--shadow-sm)' }}>
+                  <img
+                    src={receptionImg}
+                    alt="La Fuse Consultation Desk & Logo Wall"
+                    style={{ width: '100%', height: '140px', objectFit: 'cover', display: 'block' }}
+                  />
+                </div>
+                <div
+                  style={{
+                    background: 'linear-gradient(135deg, #2D3748 0%, #1A202C 100%)',
+                    borderRadius: 'var(--radius-md)',
+                    padding: '1rem',
+                    color: '#FFFFFF',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    border: '1px solid rgba(232, 117, 0, 0.3)'
+                  }}
+                >
+                  <span style={{ fontSize: '0.75rem', color: '#FFB366', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                    Authentic Clinical Facility
+                  </span>
+                  <p style={{ fontSize: '0.85rem', color: '#E2E8F0', marginTop: '0.3rem', margin: 0, fontWeight: 500 }}>
+                    📍 105, Elumalai St, West Tambaram, Chennai
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div className="about-text">
             <span className="section-subtitle">WELCOME TO LA FUSE</span>
             <h2 className="section-title" style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
@@ -51,7 +86,7 @@ const AboutUs = ({ onOpenModal }) => {
           </div>
         </div>
 
-        {/* VISION & MISSION CARDS (CLIENT SCREENSHOT REPLICA) */}
+        {/* VISION & MISSION CARDS */}
         <div className="vm-cards-grid">
           <div className="vm-card">
             <h3>Our Vision</h3>

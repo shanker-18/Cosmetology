@@ -1,29 +1,17 @@
 import React from 'react';
 import logoImg from '../assets/logo.png';
+import flowerWatermark from '../assets/flower-watermark.png';
 import { Instagram, Facebook } from 'lucide-react';
 
 const Footer = () => {
   return (
     <footer className="footer">
-      {/* VECTOR SVG WATERMARK - CRISP & ELEGANT */}
-      <svg
-        className="footer-watermark-svg"
-        viewBox="0 0 200 200"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <g opacity="0.05">
-          <ellipse cx="100" cy="50" rx="25" ry="45" fill="#E87500" />
-          <ellipse cx="100" cy="150" rx="25" ry="45" fill="#E87500" />
-          <ellipse cx="50" cy="100" rx="45" ry="25" fill="#E87500" />
-          <ellipse cx="150" cy="100" rx="45" ry="25" fill="#E87500" />
-          <ellipse cx="65" cy="65" rx="25" ry="45" transform="rotate(-45 65 65)" fill="#E87500" />
-          <ellipse cx="135" cy="135" rx="25" ry="45" transform="rotate(-45 135 135)" fill="#E87500" />
-          <ellipse cx="135" cy="65" rx="25" ry="45" transform="rotate(45 135 65)" fill="#E87500" />
-          <ellipse cx="65" cy="135" rx="25" ry="45" transform="rotate(45 65 135)" fill="#E87500" />
-          <circle cx="100" cy="100" r="20" fill="#E87500" />
-        </g>
-      </svg>
+      {/* EXACT GIVEN FLOWER WATERMARK IMAGE - SCALED DOWN ELEGANTLY */}
+      <img
+        src={flowerWatermark}
+        alt="La Fuse Flower Accent"
+        className="footer-watermark-img"
+      />
 
       <div className="container">
         <div className="footer-grid">
@@ -74,8 +62,13 @@ const Footer = () => {
               <li><strong>Hours:</strong> Mon - Sun: 10am - 8pm</li>
               <li>
                 <strong>Location:</strong>{' '}
-                <a href="https://share.google/bkHRyn5TRjyY2G38G" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary-orange)', fontWeight: 600 }}>
-                  Google Business Profile &rarr;
+                <a
+                  href="https://www.google.com/maps/dir//LA+FUSE+Cosmetology+Clinic,+105,+Elumalai+St,+West+Tambaram,+Tambaram,+Tamil+Nadu+600045/@9.1717632,77.8698752,14z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3a525fb0729be213:0x7d9285f387451a1d!2m2!1d80.1125573!2d12.9258218?hl=en-IN&entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: 'var(--primary-orange)', fontWeight: 600 }}
+                >
+                  West Tambaram, Chennai &rarr;
                 </a>
               </li>
             </ul>

@@ -64,48 +64,61 @@ const ContactUs = () => {
                 <MapPin size={20} color="#E87500" />
               </div>
               <div className="contact-detail-text">
-                <label>GOOGLE BUSINESS LOCATION</label>
+                <label>CLINIC LOCATION</label>
                 <a
-                  href="https://share.google/bkHRyn5TRjyY2G38G"
+                  href="https://www.google.com/maps/dir//LA+FUSE+Cosmetology+Clinic,+105,+Elumalai+St,+West+Tambaram,+Tambaram,+Tamil+Nadu+600045/@9.1717632,77.8698752,14z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3a525fb0729be213:0x7d9285f387451a1d!2m2!1d80.1125573!2d12.9258218?hl=en-IN&entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: '#FFFFFF', textDecoration: 'underline' }}
                 >
-                  La Fuse Cosmetology Clinic Profile &rarr;
+                  105, Elumalai St, West Tambaram, Chennai &rarr;
                 </a>
               </div>
             </div>
 
-            {/* CLICKABLE GOOGLE BUSINESS MAP CARD */}
-            <a
-              href="https://share.google/bkHRyn5TRjyY2G38G"
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* INTERACTIVE GOOGLE MAP EMBED WITH DIRECT DIRECTIONS LINK */}
+            <div
               style={{
-                marginTop: '2rem',
+                marginTop: '1.5rem',
                 borderRadius: 'var(--radius-md)',
                 overflow: 'hidden',
-                height: '180px',
-                background: '#323A42',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#FFFFFF',
-                fontSize: '0.95rem',
-                textAlign: 'center',
                 border: '1px solid rgba(232, 117, 0, 0.4)',
-                padding: '1rem',
-                transition: 'var(--transition)',
-                cursor: 'pointer'
+                background: '#1A202C'
               }}
             >
-              <MapPin size={32} color="#E87500" style={{ marginBottom: '0.5rem' }} />
-              <div style={{ fontWeight: 600, color: '#FFB366' }}>📍 View La Fuse Google Business Profile</div>
-              <div style={{ fontSize: '0.8rem', color: '#A0AEC0', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                4.7 ★★★★★ Google Reviews <ExternalLink size={12} />
-              </div>
-            </a>
+              <iframe
+                title="La Fuse Cosmetology Clinic Location"
+                src="https://maps.google.com/maps?q=12.9258218,80.1125573&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="190"
+                style={{ border: 0, display: 'block' }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+              <a
+                href="https://www.google.com/maps/dir//LA+FUSE+Cosmetology+Clinic,+105,+Elumalai+St,+West+Tambaram,+Tambaram,+Tamil+Nadu+600045/@9.1717632,77.8698752,14z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3a525fb0729be213:0x7d9285f387451a1d!2m2!1d80.1125573!2d12.9258218?hl=en-IN&entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  padding: '0.75rem 1rem',
+                  background: '#E87500',
+                  color: '#FFFFFF',
+                  fontWeight: 600,
+                  fontSize: '0.9rem',
+                  textAlign: 'center',
+                  textDecoration: 'none',
+                  transition: 'var(--transition)'
+                }}
+              >
+                <MapPin size={18} />
+                Get Directions on Google Maps <ExternalLink size={14} />
+              </a>
+            </div>
           </div>
 
           {/* Appointment Form */}
