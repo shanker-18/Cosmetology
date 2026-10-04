@@ -87,10 +87,10 @@ const AppointmentModal = ({ isOpen, onClose, selectedService }) => {
           <div style={{ textAlign: 'center', padding: '1.5rem 0' }}>
             <CheckCircle size={56} color="#E87500" style={{ margin: '0 auto 1rem' }} />
             <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--dark-charcoal)' }}>
-              Appointment Request Received!
+              Appointment Confirmed!
             </h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>
-              Thank you <strong>{name}</strong>! Your appointment has been saved to the clinic database and confirmation emails have been sent to <strong>{email || 'your email'}</strong>.
+              Thank you <strong>{name}</strong>! Your appointment is <strong>CONFIRMED</strong> for <strong>{date}</strong> at <strong>{time}</strong>. Confirmation emails have been sent to <strong>{email || 'your email'}</strong> and to <strong>La Fuse Cosmetology Clinic</strong>.
             </p>
             <button onClick={handleResetAndClose} className="btn btn-primary" style={{ width: '100%' }}>
               DONE

@@ -173,10 +173,10 @@ const ContactUs = () => {
               <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
                 <CheckCircle size={52} color="#E87500" style={{ margin: '0 auto 1rem' }} />
                 <h4 style={{ fontSize: '1.4rem', color: 'var(--dark-charcoal)', marginBottom: '0.5rem' }}>
-                  Request Submitted Successfully!
+                  Appointment Confirmed!
                 </h4>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
-                  Thank you! Your appointment has been saved to the database and confirmation emails have been dispatched to your inbox and <strong>La Fuse Cosmetology Clinic</strong>.
+                  Thank you! Your appointment is <strong>CONFIRMED</strong>. Confirmation emails have been dispatched to your inbox and <strong>La Fuse Cosmetology Clinic</strong>.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
