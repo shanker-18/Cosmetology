@@ -937,11 +937,99 @@ h1, h2, h3, h4, h5, h6 {
   .nav-links.active { display: flex; }
   .hamburger { display: block; }
   .nav-actions .btn-primary { display: none; }
-  .hero { height: 70vh; min-height: 480px; }
-  .hero-title { font-size: 2rem; }
+  
+  /* HERO SLIDER MOBILE FIX */
+  .hero {
+    height: 82vh;
+    min-height: 520px;
+    max-height: 640px;
+    padding-bottom: 0;
+  }
+  .slide {
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+  }
+  .hero-content {
+    padding-left: 0;
+    padding-bottom: 0;
+    max-width: 100%;
+  }
+  .hero-badge {
+    font-size: 0.78rem;
+    padding: 0.35rem 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+  .hero-title {
+    font-size: 1.7rem;
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+  }
+  .hero-subtitle {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    color: #E2E8F0;
+  }
+  .hero-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .hero-buttons .btn {
+    flex: 1;
+    padding: 0.65rem 0.4rem;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+  .slider-dots {
+    bottom: 1.5rem;
+    left: 1.5rem;
+    transform: none;
+  }
+  .slider-controls {
+    bottom: 1.2rem;
+    right: 1.5rem;
+    gap: 0.5rem;
+  }
+  .slider-arrow {
+    width: 38px;
+    height: 38px;
+  }
+
   .form-grid { grid-template-columns: 1fr; }
   .form-group.full-width { grid-column: span 1; }
   .footer-grid { grid-template-columns: 1fr; }
   .mobile-sticky-bar { display: flex; }
   body { padding-bottom: 60px; }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 85vh;
+    min-height: 500px;
+  }
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  .hero-subtitle {
+    font-size: 0.82rem;
+  }
+  .hero-buttons .btn {
+    font-size: 0.72rem;
+    padding: 0.6rem 0.2rem;
+  }
+  .slider-dots {
+    left: 1rem;
+    gap: 0.4rem;
+  }
+  .slider-controls {
+    right: 1rem;
+  }
 }

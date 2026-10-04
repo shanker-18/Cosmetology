@@ -19,7 +19,7 @@ const slidesData = [
     subtitle: 'Combat hair loss and scalp issues with state-of-the-art hair growth therapies, PRP treatments, and expert trichology care.',
     bgImage: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1600&q=80',
     primaryBtn: 'GET APPOINTMENT',
-    secondaryBtn: 'OUR SPECIALIZATION',
+    secondaryBtn: 'SPECIALIZATION',
     secondaryHref: '#specialization',
   },
   {
@@ -29,7 +29,7 @@ const slidesData = [
     subtitle: 'Achieve your desired contour with medically approved body firming, double chin reduction, and figure correction.',
     bgImage: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=1600&q=80',
     primaryBtn: 'GET APPOINTMENT',
-    secondaryBtn: 'CONSULT A SPECIALIST',
+    secondaryBtn: 'CONTACT US',
     secondaryHref: '#contact',
   },
 ];
