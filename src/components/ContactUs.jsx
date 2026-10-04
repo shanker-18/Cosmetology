@@ -55,7 +55,7 @@ const ContactUs = () => {
               </div>
               <div className="contact-detail-text">
                 <label>EMAIL ADDRESS</label>
-                <a href="mailto:lafusecosmetologyclinic@gmail.com">lafusecosmetologyclinic@gmail.com</a>
+                <a href="mailto:lafusecosmetologyclinic@gmail.com" style={{ color: '#FFFFFF', wordBreak: 'break-all', overflowWrap: 'anywhere' }}>lafusecosmetologyclinic@gmail.com</a>
               </div>
             </div>
 
