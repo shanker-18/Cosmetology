@@ -31,7 +31,6 @@ const specsData = [
       'Warts Removal',
       'Dark Lips Laser Treatment',
       'Laser Hair Reduction',
-      'Botox',
       'Filler',
       'Melasma Treatment',
       'Vampire Facial (PRP)',
